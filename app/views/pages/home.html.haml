@@ -1,4 +1,16 @@
-%h1 Public Todos
+.jumbotron.jumbotron-fluid
+  .container
+    %h1.display-3 PublicTodos
+    %p.lead This is a todo app, 'No!!!', this is a public todos app
+
+    %hr.m-y-md
+
+    %p 
+      = link_to 'Sign Up', new_user_registration_path
+      to create your public and private todos.
+
+    %p.lead
+      = link_to 'Sign In', new_user_session_path, class: "btn btn-success btn-lg", role: 'button'
 
 .col-md-4
   -# Card Light
