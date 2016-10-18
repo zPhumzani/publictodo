@@ -23,15 +23,15 @@
       = link_to fa_icon('eye'), task
   - if user_signed_in? && current_user == task.user
     .card-footer.text-xs-center
-      - if task.state == 'to_do'
+      - if task.todo?
         = button_to change_task_path(task, state: 'doing'), method: :put, class: 'btn-link' do
           = fa_icon('hand-o-right').html_safe
-      - elsif task.state == 'done'
+      - elsif task.done?
         = button_to change_task_path(task, state: 'doing'), method: :put, class: 'btn-link' do
           = fa_icon('hand-o-left').html_safe
       - else
         .btn-group{role: 'group'}
-          = button_to change_task_path(task, state: 'to_do'), method: :put, class: 'btn btn-link' do
+          = button_to change_task_path(task, state: 'todo'), method: :put, class: 'btn btn-link' do
             = fa_icon('hand-o-left').html_safe
           = button_to change_task_path(task, state: 'done'), method: :put, class: 'btn btn-link' do
             = fa_icon('hand-o-right').html_safe

@@ -6,12 +6,12 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if user_signed_in? && current_user
-      @tasks_todo = current_user.tasks.where(state: 'to_do')
+      @tasks_todo = current_user.tasks.where(state: 'todo')
       @tasks_doing = current_user.tasks.where(state: 'doing')
       @tasks_done = current_user.tasks.where(state: 'done')
     else
       @tasks = Task.all.where(private: false)
-      @tasks_todo = Task.where(state: 'to_do', private: false)
+      @tasks_todo = Task.where(state: 'todo', private: false)
       @tasks_doing = Task.where(state: 'doing', private: false)
       @tasks_done = Task.where(state: 'done', private: false)
     end
@@ -89,6 +89,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:content, :slug, :private, :state)
+      params.require(:task).permit(:content, :content_html, :slug, :private, :state)
     end
 end

@@ -3,6 +3,7 @@
 @import "bootstrap";
 @import "font-awesome";
 
+$enable-flex: true;
 // make all images responsive by default
 img {
   @extend .img-fluid;
@@ -95,5 +96,15 @@ article {
         color: red;
       }
     }
+  }
+}
+
+.header {
+  background: #563d7c;
+  padding: 2em 1em;
+  color: #fff;
+  margin-bottom: 2em;
+  h1 {
+    font-weight: 200;
   }
 }

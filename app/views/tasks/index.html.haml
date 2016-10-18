@@ -1,23 +1,39 @@
 .row
-  %article.col-md-12
-    = link_to "New Todo", new_task_path
-  %article.card.col-md-4{style: "border: none"}
-    .card-header.text-xs-center
-      %h1.card-title 
-        = fa_icon('list-alt')
-        Todos
-    = render @tasks_todo, style: 'warning'
+  - unless user_signed_in?
+    .card-columns
+      - @tasks_todo.each do |task|
+        %article.card.card-secondary
+          .card-header
+            %h2.card-title.text-left
+              Created by
+              = link_to task.user, task.user
+              = time_ago_in_words(task.created_at)
+              ago
 
-  %article.card.col-md-4{style: "border: none"}
-    .card-header.text-xs-center
-      %h1.card-title 
-        = fa_icon('building-o')
-        Doing
-    = render @tasks_doing, style: 'danger'
+          .card-block
+            %p.card-text
+              = truncate task.content, length: 100
+              = link_to fa_icon('eye'), task
+  - else
+    %article.col-md-12
+      = link_to "New Todo", new_task_path
+    %article.card.col-md-4{style: "border: none"}
+      .card-header.text-xs-center
+        %h1.card-title 
+          = fa_icon('list-alt')
+          Todos
+      = render @tasks_todo, style: 'warning'
 
-  %article.card.col-md-4{style: "border: none"}
-    .card-header.text-xs-center
-      %h1.card-title 
-        = fa_icon('check-square-o')
-        Done
-    = render @tasks_done, style: 'success'
+    %article.card.col-md-4{style: "border: none"}
+      .card-header.text-xs-center
+        %h1.card-title 
+          = fa_icon('building-o')
+          Doing
+      = render @tasks_doing, style: 'danger'
+
+    %article.card.col-md-4{style: "border: none"}
+      .card-header.text-xs-center
+        %h1.card-title 
+          = fa_icon('check-square-o')
+          Done
+      = render @tasks_done, style: 'success'
