@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b First nme:
+  = @user.first_nme
+%p
+  %b Last name:
+  = @user.last_name
+
+= link_to 'Edit', edit_user_path(@user)
+\|
+= link_to 'Back', users_path
