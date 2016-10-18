@@ -1,12 +1,13 @@
--# navigation styled for Bootstrap 3.0
-%nav.navbar.navbar-dark.bg-inverse
-  .container
-    %ul.nav.navbar-nav.clearfix
-      %li.nav-item
-        %button.navbar-toggler.hidden-sm-up.nav-link{"aria-controls" => "exCollapsingNavbar2", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#exCollapsingNavbar2", "data-toggle" => "collapse", :type => "button"}
-          \ &#9776;
-    #exCollapsingNavbar2.collapse.navbar-toggleable-xs
-      = link_to root_path, class: 'navbar-brand' do
-        %i.fa.fa-sun-o
-        PublicTodo
-      %ul.nav.navbar-nav.pull-xs-right= render 'layouts/navigation_links'
+-# .navbar 
+%nav.navbar.navbar-full.navbar-dark.bg-primary
+  .container-fluid
+    %button.navbar-toggler.hidden-md-up{ type: "button", "data-toggle": "collapse", "data-target": "#mainNavbarCollapse"} &#9776;
+
+    = link_to root_path, class: 'navbar-brand' do
+      %i.fa.fa-sun-o
+      PublicTodo
+      -#= image_tag 'https://placehold.it/32/ffffff?text=B', class: "img-rounded"
+
+    .collapse.navbar-toggleable-sm#mainNavbarCollapse
+      %ul.nav.navbar-nav.pull-md-right
+        = render 'layouts/navigation_links'

@@ -1,7 +1,14 @@
-%li.nav-item= link_to 'Tasks', '', class: 'nav-link'
-%li.nav-item= link_to 'About', about_path, class: 'nav-link'
-- unless user_signed_in?
+- if user_signed_in?
+  %li.nav-item= link_to fa_icon("tasks") + 'Tasks', '', class: 'nav-link'
+  %li.nav-item.dropdown
+    = link_to '#', class: 'dropdown-toggle nav-link', "data-toggle": "dropdown", role: "button"," aria-haspopup": "true", "aria-expanded": "false" do
+      = current_user 
+    .dropdown-menu{ "aria-labelledby": "Preview"}
+      = link_to 'Bio', user_path(current_user), class: 'dropdown-item'
+      = link_to 'Settings', edit_user_registration_path, class: 'dropdown-item'
+  %li.nav-item= link_to "Logout", destroy_user_session_path, method: :delete, class: 'nav-link'
+- else
+  %li.nav-item= link_to 'About', about_path, class: 'nav-link'
   %li.nav-item=link_to 'Sign In', new_user_session_path, class: 'nav-link'
   %li.nav-item=link_to "Sign Up", new_user_registration_path, class: 'nav-link'
-- else
-  %li.nav-item= link_to "Logout", destroy_user_session_path, method: :delete, class: 'nav-link'
+
