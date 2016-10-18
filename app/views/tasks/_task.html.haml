@@ -1,16 +1,37 @@
-%tr
-  %td= task.state
-  %td= task.content
-  %td= task.slug
-  - if task.private == true
-    %td= button_to "#{task.private}", change_task_path(task, private: false), method: :put
-  - else
-    %td= button_to "#{task.private}", change_task_path(task, private: true), method: :put
-  %td= link_to 'Show', task
-  %td= link_to 'Edit', edit_task_path(task)
-  %td= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
-  - unless task.state == 'doing'
-    %td= button_to 'Mark as Doing', change_task_path(task, state: 'doing'), method: :put
-  - else
-    %td= button_to 'Mark as Todo', change_task_path(task, state: 'to_do'), method: :put
-    %td= button_to 'Mark as Done', change_task_path(task, state: 'done'), method: :put
+.card.card-inverse{class: "card-#{style}"}
+  .card-header
+    %h2.card-title
+      - if user_signed_in? && current_user == task.user
+        - if task.private == true
+          = button_to change_task_path(task, private: false), method: :put, class: 'pull-xs-left' do
+            .true= fa_icon('user-secret')
+        - else
+          = button_to change_task_path(task, private: true), method: :put, class: 'pull-xs-left' do
+            .false= fa_icon('user-secret')
+      Created 
+      = time_ago_in_words(task.created_at)
+      ago
+      - if user_signed_in? && current_user == task.user
+        = link_to fa_icon('trash-o'), task, method: :delete, class: 'pull-xs-right', data: {confirm: "Are You Sure?"}
+
+  .card-block
+    %p.card-text
+      = truncate task.content, length: 100
+      - if user_signed_in? && current_user == task.user
+        = link_to fa_icon('pencil-square-o'), edit_task_path(task)
+        |
+      = link_to fa_icon('eye'), task
+  - if user_signed_in? && current_user == task.user
+    .card-footer.text-xs-center
+      - if task.state == 'to_do'
+        = button_to change_task_path(task, state: 'doing'), method: :put, class: 'btn-link' do
+          = fa_icon('hand-o-right').html_safe
+      - elsif task.state == 'done'
+        = button_to change_task_path(task, state: 'doing'), method: :put, class: 'btn-link' do
+          = fa_icon('hand-o-left').html_safe
+      - else
+        .btn-group{role: 'group'}
+          = button_to change_task_path(task, state: 'to_do'), method: :put, class: 'btn btn-link' do
+            = fa_icon('hand-o-left').html_safe
+          = button_to change_task_path(task, state: 'done'), method: :put, class: 'btn btn-link' do
+            = fa_icon('hand-o-right').html_safe

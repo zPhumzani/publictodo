@@ -6,9 +6,9 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if user_signed_in? && current_user
-      @tasks_todo = Task.where(state: 'to_do')
-      @tasks_doing = Task.where(state: 'doing')
-      @tasks_done = Task.where(state: 'done')
+      @tasks_todo = current_user.tasks.where(state: 'to_do')
+      @tasks_doing = current_user.tasks.where(state: 'doing')
+      @tasks_done = current_user.tasks.where(state: 'done')
     else
       @tasks = Task.all.where(private: false)
       @tasks_todo = Task.where(state: 'to_do', private: false)

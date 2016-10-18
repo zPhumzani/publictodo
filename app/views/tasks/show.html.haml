@@ -16,3 +16,7 @@
 = link_to 'Edit', edit_task_path(@task)
 \|
 = link_to 'Back', tasks_path
+- if @task.private == true
+  = button_to "#{@task.private}", change_task_path(@task, private: false), method: :put
+- else
+  = link_to "#{@task.private}", change_task_path(@task, private: true), method: :put, class: ' btn btn-link'

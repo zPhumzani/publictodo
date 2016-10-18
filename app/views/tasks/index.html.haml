@@ -1,59 +1,23 @@
-%h1 Todos
+.row
+  %article.col-md-12
+    = link_to "New Todo", new_task_path
+  %article.card.col-md-4{style: "border: none"}
+    .card-header.text-xs-center
+      %h1.card-title 
+        = fa_icon('list-alt')
+        Todos
+    = render @tasks_todo, style: 'warning'
 
-%table.table
-  %thead
-    %tr
-      %th State
-      %th Content
-      %th Slug
-      %th Private
-      %th
-      %th
-      %th
-      %th
+  %article.card.col-md-4{style: "border: none"}
+    .card-header.text-xs-center
+      %h1.card-title 
+        = fa_icon('building-o')
+        Doing
+    = render @tasks_doing, style: 'danger'
 
-  %tbody
-    = render @tasks_todo
-
-%br
-
-= link_to 'New Task', new_task_path
-
-
-%h1 Doing
-
-%table.table
-  %thead
-    %tr
-      %th State
-      %th Content
-      %th Slug
-      %th Private
-      %th
-      %th
-      %th
-      %th
-
-  %tbody
-    = render @tasks_doing
-
-%br
-
-%h1 Done
-
-%table.table
-  %thead
-    %tr
-      %th State
-      %th Content
-      %th Slug
-      %th Private
-      %th
-      %th
-      %th
-      %th
-
-  %tbody
-    = render @tasks_done
-
-%br
+  %article.card.col-md-4{style: "border: none"}
+    .card-header.text-xs-center
+      %h1.card-title 
+        = fa_icon('check-square-o')
+        Done
+    = render @tasks_done, style: 'success'
