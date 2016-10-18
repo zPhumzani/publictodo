@@ -1,0 +1,16 @@
+%tr
+  %td= task.state
+  %td= task.content
+  %td= task.slug
+  - if task.private == true
+    %td= button_to "#{task.private}", change_task_path(task, private: false), method: :put
+  - else
+    %td= button_to "#{task.private}", change_task_path(task, private: true), method: :put
+  %td= link_to 'Show', task
+  %td= link_to 'Edit', edit_task_path(task)
+  %td= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  - unless task.state == 'doing'
+    %td= button_to 'Mark as Doing', change_task_path(task, state: 'doing'), method: :put
+  - else
+    %td= button_to 'Mark as Todo', change_task_path(task, state: 'to_do'), method: :put
+    %td= button_to 'Mark as Done', change_task_path(task, state: 'done'), method: :put
