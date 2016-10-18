@@ -1,0 +1,11 @@
+= simple_form_for(@task) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :user
+    = f.input :content
+    = f.input :slug
+    = f.input :private
+
+  .form-actions
+    = f.button :submit
