@@ -27,10 +27,11 @@ ActiveRecord::Schema.define(version: 20161018132424) do
   create_table "tasks", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
+    t.string   "state",      default: "to_do"
     t.string   "slug"
-    t.boolean  "private"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "private",    default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["slug"], name: "index_tasks_on_slug"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end

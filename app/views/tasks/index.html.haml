@@ -1,9 +1,9 @@
-%h1 Listing tasks
+%h1 Todos
 
 %table
   %thead
     %tr
-      %th User
+      %th State
       %th Content
       %th Slug
       %th Private
@@ -12,9 +12,66 @@
       %th
 
   %tbody
-    - @tasks.each do |task|
+    - @tasks_todo.each do |task|
       %tr
-        %td= task.user
+        %td= task.state
+        %td= task.content
+        %td= task.slug
+        %td= task.private
+        %td= link_to 'Show', task
+        %td= link_to 'Edit', edit_task_path(task)
+        %td= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Task', new_task_path
+
+
+%h1 Doing
+
+%table
+  %thead
+    %tr
+      %th State
+      %th Content
+      %th Slug
+      %th Private
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tasks_doing.each do |task|
+      %tr
+        %td= task.state
+        %td= task.content
+        %td= task.slug
+        %td= task.private
+        %td= link_to 'Show', task
+        %td= link_to 'Edit', edit_task_path(task)
+        %td= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Task', new_task_path
+
+%h1 Todo
+
+%table
+  %thead
+    %tr
+      %th State
+      %th Content
+      %th Slug
+      %th Private
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tasks_done.each do |task|
+      %tr
+        %td= task.state
         %td= task.content
         %td= task.slug
         %td= task.private
