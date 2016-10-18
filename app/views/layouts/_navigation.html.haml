@@ -6,5 +6,7 @@
         %button.navbar-toggler.hidden-sm-up.nav-link{"aria-controls" => "exCollapsingNavbar2", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#exCollapsingNavbar2", "data-toggle" => "collapse", :type => "button"}
           \ &#9776;
     #exCollapsingNavbar2.collapse.navbar-toggleable-xs
-      = link_to "PublicTodo", root_path, class: 'navbar-brand'
+      = link_to root_path, class: 'navbar-brand' do
+        %i.fa.fa-sun-o
+        PublicTodo
       %ul.nav.navbar-nav.pull-xs-right= render 'layouts/navigation_links'
